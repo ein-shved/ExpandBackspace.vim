@@ -130,8 +130,9 @@ function! s:ResetMap()
     silent! iunmap <Del>
 endfunction
 function! s:CheckExpandTab()
-    let l:x=&expandtab
-    if ( l:x )
+    let l:ex=&expandtab
+    let l:st=&softtabstop
+    if ( l:ex && l:st == 0 )
         exec s:PrepareMap()
     else
         exec s:ResetMap()
