@@ -126,19 +126,19 @@ function! s:PrepareMap()
     inoremap <silent> <Del> <C-R>=<SID>TO(0)<CR><C-R>=<SID>ExpandDelete()<CR><C-R>=<SID>TO(1)<CR>
 endfunction
 function! s:ResetMap()
-    silent! iunmap <BS>
-    silent! iunmap <Del>
+    iunmap <BS>
+    iunmap <Del>
 endfunction
 function! s:CheckExpandTab()
     let l:ex=&expandtab
     let l:st=&softtabstop
     if ( l:ex && l:st == 0 )
-        exec s:PrepareMap()
+        call s:PrepareMap()
     else
-        exec s:ResetMap()
+        call s:ResetMap()
     endif
 endfunction
 
 augroup expand_bs_autocmds
-    autocmd BufEnter * exec s:CheckExpandTab()
+    autocmd BufEnter * silent! call s:CheckExpandTab()
 augroup END
